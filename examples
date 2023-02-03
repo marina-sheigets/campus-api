@@ -1,0 +1,14 @@
+http://localhost:5000/auth/student/registration
+
+{
+    "fullName": "",
+	"password": "",
+	"email": "string",
+	"phoneNumber": "string",
+	"yearOfAdmission": "string",
+	"faculty": "string",
+	"cathedra": "string",
+	"specialty": "string",
+	"group": "string",
+	"typeOfStudying": "string"
+}
