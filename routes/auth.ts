@@ -3,7 +3,8 @@ import usersController from '../controllers/usersController';
 
 const router = Router();
 
-// student
+router.post('/admin/registration', usersController.adminRegistration);
+
 router.post('/student/registration', usersController.studentRegistration);
 router.post('/login', usersController.login);
 router.post('/logout', usersController.logout);

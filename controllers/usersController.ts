@@ -3,6 +3,20 @@ import usersService from '../services/usersService';
 import { generatePassword } from '../utils/generatePassword';
 
 class UsersController {
+	async adminRegistration(req: Request, res: Response, next: NextFunction) {
+		try {
+			const password = generatePassword(8);
+			const adminData = await usersService.adminRegistration({ ...req.body, password });
+			res.cookie('refreshToken', adminData.refreshToken, {
+				maxAge: 30 * 24 * 60 * 60 * 1000,
+				httpOnly: true,
+			});
+			return res.json(adminData);
+		} catch (e) {
+			next(e);
+		}
+	}
+
 	async studentRegistration(req: Request, res: Response, next: NextFunction) {
 		try {
 			const password = generatePassword(8);

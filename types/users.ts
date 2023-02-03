@@ -11,6 +11,12 @@ export interface StudentBody {
 	type: string;
 }
 
+export interface AdminBody {
+	name: string;
+	password: string;
+	email: string;
+	phoneNumber: string;
+}
 export type Error = {
 	message: string;
 	status: string;

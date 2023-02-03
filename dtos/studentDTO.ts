@@ -47,3 +47,19 @@ export class TeacherDTO {
 		this.position = model.position;
 	}
 }
+
+export class AdminDTO {
+	id: number;
+	name: string;
+	email: string;
+	phoneNumber: string;
+	isAdmin: boolean;
+
+	constructor(model: any) {
+		this.email = model.email;
+		this.id = model._id;
+		this.name = model.name;
+		this.phoneNumber = model.phoneNumber;
+		this.isAdmin = model.isAdmin;
+	}
+}
