@@ -135,7 +135,7 @@ class UsersService {
 		}
 		let student = await Student.findById(tokenData.user);
 		let teacher = await Teacher.findById(tokenData.user);
-
+		let admin = await Admin.findById(tokenData.user);
 		if (student) {
 			const studentDTO = new StudentDTO(student);
 			const tokens = tokenService.generateTokens({ ...studentDTO });
@@ -151,6 +151,14 @@ class UsersService {
 			return {
 				...tokens,
 				user: teacherDTO,
+			};
+		} else if (admin) {
+			const adminDTO = new AdminDTO(admin);
+			const tokens = tokenService.generateTokens({ ...adminDTO });
+			await tokenService.saveToken(adminDTO.id, tokens.refreshToken);
+			return {
+				...tokens,
+				user: adminDTO,
 			};
 		}
 	}
