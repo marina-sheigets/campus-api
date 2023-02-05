@@ -26,6 +26,8 @@ app.use(
 );
 
 app.use('/auth', AuthRouter);
+app.use('/admin', AdminRouter);
+
 app.use(errorMiddleware);
 
 mongoose

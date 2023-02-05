@@ -46,8 +46,12 @@ class UsersService {
 			password,
 		} = payload;
 		const candidate = await Student.findOne({ email });
+		const foundPhoneNumber = await Student.findOne({ phoneNumber });
 		if (candidate) {
-			throw ApiError.BadRequest('User with such email exists');
+			throw ApiError.BadRequest('Student with such email exists');
+		}
+		if (foundPhoneNumber) {
+			throw ApiError.BadRequest('Student with such phone number exists');
 		}
 		const hashPassword = await bcrypt.hash(password, 3);
 		const newStudent = await Student.create({
