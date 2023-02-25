@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 
 const CathedraSchema = new Schema({
-	cathedraID: {
+	abbreviation: {
 		type: String,
 		required: true,
 		unique: true,
@@ -11,7 +11,7 @@ const CathedraSchema = new Schema({
 		required: true,
 		unique: true,
 	},
-	facultyID: { ref: 'Faculty', type: Schema.Types.ObjectId },
+	faculty: { type: String, required: true, unique: false },
 });
 
 export default model('Cathedra', CathedraSchema);
