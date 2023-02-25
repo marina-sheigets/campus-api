@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 
 const FacultySchema = new Schema({
-	facultyID: {
+	abbreviation: {
 		type: String,
 		required: true,
 		unique: true,
