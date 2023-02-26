@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 
 const SpecialtySchema = new Schema({
-	specialtyID: {
+	number: {
 		type: String,
 		required: true,
 		unique: true,
@@ -10,10 +10,6 @@ const SpecialtySchema = new Schema({
 		type: String,
 		required: true,
 		unique: true,
-	},
-	cathedraID: {
-		ref: 'Cathedra',
-		type: Schema.Types.ObjectId,
 	},
 });
 
