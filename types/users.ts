@@ -1,4 +1,5 @@
 export interface StudentBody {
+	_id: string;
 	name: string;
 	password: string;
 	email: string;
@@ -9,6 +10,7 @@ export interface StudentBody {
 	specialty: string;
 	group: string;
 	type: string;
+	formOfStudying: string;
 }
 
 export interface AdminBody {

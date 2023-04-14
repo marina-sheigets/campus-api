@@ -4,8 +4,12 @@ import cathedraController from '../controllers/cathedraController';
 import facultyController from '../controllers/facultyController';
 import specialtyController from '../controllers/specialtyController';
 import authMiddleware from '../middleware/auth-middleware';
+import studentController from '../controllers/studentController';
 
 const router = Router();
+
+router.get('/list/students', authMiddleware, studentController.getAllStudents);
+router.delete('/student/:id', authMiddleware, studentController.deleteStudentById);
 
 router.post('/add/faculty', authMiddleware, facultyController.createFaculty);
 router.get('/list/faculties', authMiddleware, facultyController.getFaculties);

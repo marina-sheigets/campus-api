@@ -3,7 +3,7 @@ import usersController from '../controllers/usersController';
 import authMiddleware from '../middleware/auth-middleware';
 const router = Router();
 
-router.post('/admin/registration', authMiddleware, usersController.adminRegistration);
+router.post('/admin/registration', usersController.adminRegistration);
 
 router.post('/student/registration', authMiddleware, usersController.studentRegistration);
 router.post('/login', usersController.login);
