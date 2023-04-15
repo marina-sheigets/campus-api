@@ -29,6 +29,18 @@ class MailService {
 			</div>`,
 		});
 	}
+	async sendNewPassword(to: string, password: string) {
+		await transporter.sendMail({
+			from: process.env.SMTP_USER,
+			to,
+			subject: 'You got a new password !',
+			text: '',
+			html: `<div>
+			<p> Your email is <b>${to}</b> </p>
+			<p> Your new password is <b>${password}</b> </p>
+			</div>`,
+		});
+	}
 }
 
 export default new MailService();

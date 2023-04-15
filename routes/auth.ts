@@ -9,5 +9,6 @@ router.post('/student/registration', authMiddleware, usersController.studentRegi
 router.post('/login', usersController.login);
 router.post('/logout', usersController.logout);
 router.get('/refresh', usersController.refresh);
+router.post('/restore/password', usersController.restore);
 
 export default router;

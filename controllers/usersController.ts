@@ -1,6 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import usersService from '../services/usersService';
 import { generatePassword } from '../utils/generatePassword';
+import Student from '../models/Student';
+import ApiError from '../exceptions/api-error';
+import mailService from '../services/mailService';
+import Admin from '../models/Admin';
+import bcrypt from 'bcryptjs';
 
 class UsersController {
 	async adminRegistration(req: Request, res: Response, next: NextFunction) {
@@ -63,6 +68,41 @@ class UsersController {
 				httpOnly: true,
 			});
 			return res.status(200).json(userData);
+		} catch (e) {
+			next(e);
+		}
+	}
+
+	async restore(req: Request, res: Response, next: NextFunction) {
+		try {
+			const { email } = req.body;
+			let studentCandidate = await Student.findOne({ email });
+			// if (!candidate) {
+			// 	throw ApiError.BadRequest('User with such email does not exists');
+			// }
+			let adminCandidate = await Admin.findOne({ email });
+			if (!studentCandidate && !adminCandidate) {
+				throw ApiError.BadRequest('User with such email does not exists');
+			}
+			//candidate  = await Teacher.findOne({email});
+			// if(!candidate){
+			// 	throw ApiError.BadRequest('User with such email does not exists');
+			// }
+			const password = generatePassword(8);
+			const hashPassword = await bcrypt.hash(password, 3);
+
+			if (adminCandidate) {
+				adminCandidate.password = hashPassword;
+				await adminCandidate.save();
+			} else if (studentCandidate) {
+				studentCandidate.password = hashPassword;
+				await studentCandidate.save();
+			}
+			await mailService.sendNewPassword(email, password);
+
+			return res
+				.status(200)
+				.json({ message: 'The new password was sent on your email address' });
 		} catch (e) {
 			next(e);
 		}
