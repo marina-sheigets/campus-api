@@ -37,6 +37,31 @@ class ArticleController {
 			next(e);
 		}
 	}
+	async editArticle(req: Request, res: Response, next: NextFunction) {
+		try {
+			const { id } = req.params;
+			const { name, content, links } = req.body;
+			let articleCandidate = await Article.findById(id);
+			if (!articleCandidate) {
+				throw ApiError.BadRequest('Such article does not exist');
+			}
+
+			const article = await Article.updateOne(
+				{ _id: articleCandidate.id },
+				{
+					$set: {
+						name,
+						content,
+						links,
+					},
+				}
+			);
+
+			return res.json({ article });
+		} catch (e) {
+			next(e);
+		}
+	}
 }
 
 export default new ArticleController();

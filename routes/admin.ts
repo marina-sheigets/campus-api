@@ -24,6 +24,7 @@ router.get('/list/specialties', authMiddleware, specialtyController.getSpecialti
 router.delete('/specialty/:id', authMiddleware, specialtyController.deleteSpecialty);
 
 router.post('/add/article', authMiddleware, articleController.createArticle);
+router.patch('/edit/article/:id', authMiddleware, articleController.editArticle);
 router.get('/list/articles', authMiddleware, articleController.getArticles);
 router.delete('/article/:id', authMiddleware, articleController.deleteArticle);
 
